@@ -302,10 +302,10 @@ def importges():
     camdata = json.load(jfile)
     jfile.close
 
-#set render resolution and fps
-bpy.context.scene.render.resolution_x = camdata["width"]
-bpy.context.scene.render.resolution_y = camdata["height"]
-bpy.context.scene.render.fps = camdata["frameRate"]
+    #set render resolution and fps
+    bpy.context.scene.render.resolution_x = camdata["width"]
+    bpy.context.scene.render.resolution_y = camdata["height"]
+    bpy.context.scene.render.fps = camdata["frameRate"]
 
     # evaluate number of frames
     s_end = camdata["numFrames"]
@@ -422,13 +422,13 @@ bpy.context.scene.render.fps = camdata["frameRate"]
     cam.data.type = 'PERSP'
     cam.data.lens_unit = 'FOV'
 
-# camera "lens" based on json
-for f in range (0,s_end + 1):
-    bpy.context.scene.camera.data.angle = math.radians(camdata["cameraFrames"][f]["fovVertical"])
-    bpy.context.scene.camera.data.keyframe_insert(data_path="lens", index=-1, frame=f+1)
+    # camera "lens" based on json
+    for f in range (0,s_end + 1):
+        bpy.context.scene.camera.data.angle = math.radians(camdata["cameraFrames"][f]["fovVertical"])
+        bpy.context.scene.camera.data.keyframe_insert(data_path="lens", index=-1, frame=f+1)
 
-# camera "sensor width" is 64mm. Based on manual looking in likely matching.
-cam.data.sensor_width = 64
+    # camera "sensor width" is 64mm. Based on manual looking in likely matching.
+    cam.data.sensor_width = 64
 
 
 
